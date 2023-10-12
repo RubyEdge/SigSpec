@@ -15,11 +15,14 @@ namespace SigSpec.CodeGeneration.Models
             _operation = operation;
 
             Name = name;
+            Description = operation.Description;
             ReturnType = operation.ReturnType != null ? new ReturnTypeModel(_operation.ReturnType, resolver) : null;
             Parameters = operation.Parameters.Select(o => new ParameterModel(o.Key, o.Value, resolver));
         }
 
         public string Name { get; }
+
+        public string Description { get; }
 
         public string MethodName => ConversionUtilities.ConvertToLowerCamelCase(Name, true);
 
