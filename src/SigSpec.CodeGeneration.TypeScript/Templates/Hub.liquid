@@ -19,7 +19,7 @@
         return this.connection.invoke('{{ operation.Name }}'{% for parameter in operation.Parameters %}, {{ parameter.Name }}{% endfor %});
     }
 {%     else -%}
-    */
+     */
     {{ operation.MethodName }}({% for parameter in operation.Parameters %}{{ parameter.Name }}: {{ parameter.Type }}{% if parameter.GenerateOptional %} | null{% endif %}{% if forloop.last == false %}, {% endif %}{% endfor %}): Promise<void> {
         return this.connection.invoke('{{ operation.Name }}'{% for parameter in operation.Parameters %}, {{ parameter.Name }}{% endfor %});
     }
