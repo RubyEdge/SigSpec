@@ -9,6 +9,7 @@ namespace SigSpec.CodeGeneration.Models
         public ParameterModel(string name, SigSpecParameter parameter, TypeResolverBase resolver)
         {
             Name = name;
+            Description = parameter.Description;
             Type = resolver.Resolve(parameter.ActualTypeSchema, parameter.IsNullable(SchemaType.JsonSchema), Name);
             var containsOptional = Type.Contains("?");
             // if we are already have a ?, then we won't need to generate another one
@@ -32,6 +33,8 @@ namespace SigSpec.CodeGeneration.Models
         }
 
         public string Name { get; }
+
+        public string Description { get; }
 
         public string Type { get; }
 
