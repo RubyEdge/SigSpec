@@ -135,13 +135,13 @@ namespace SigSpec.Core
                     : method.ReturnType;
 
             operation.ReturnType = returnType == null ? null : generator.GenerateWithReferenceAndNullability<JsonSchema>(
-                returnType.ToContextualType(), returnType.ToContextualType().IsNullableType, resolver, async (p, s) =>
+                returnType.ToContextualType(), returnType.ToContextualType().IsNullableType, resolver, (p, s) =>
                 {
                     string returnDescr = method.GetXmlDocsTag("returns");
 
                     p.Description = method.ReturnType.GetXmlDocsSummary();
 
-                    if (returnDescr != null && (p.Description == null || p.Description == ""))
+                    if (!string.IsNullOrEmpty(returnDescr) && string.IsNullOrEmpty(p.Description))
                     {
                         p.Description = returnDescr;
                     }
